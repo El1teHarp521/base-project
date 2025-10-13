@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проекты - Портфолио</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <script src="../scripts/main.js"></script>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🌿</span>
+                    <span class="logo-text">Солоткин Артем</span>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="../index.html" class="nav-link">Главная</a></li>
+                        <li><a href="projects.html" class="nav-link active">Проекты</a></li>
+                        <li><a href="diary.html" class="nav-link">Дневник</a></li>
+                        <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="projects">
+        <div class="container">
+            <div class="projects-header">
+                <h1 class="section-title">Мои проекты</h1>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Все</button>
+                    <button class="filter-btn" data-filter="html">HTML/CSS</button>
+                    <button class="filter-btn" data-filter="js">JavaScript</button>
+                    <button class="filter-btn" data-filter="react">React</button>
+                </div>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card" data-tech="html">
+                    <div class="project-image">
+                        <img src="../images/project1.jpg" alt="Личный сайт" class="project-photo">
+                    </div>
+                    <h3 class="project-title">Личный сайт</h3>
+                    <p class="project-description">Адаптивный сайт-визитка с современным дизайном и анимациями</p>
+                    <div class="project-tech">HTML, CSS</div>
+                </div>
+
+                <div class="project-card" data-tech="js">
+                    <div class="project-image">
+                        <img src="../images/project2.jpg" alt="Todo-приложение" class="project-photo">
+                    </div>
+                    <h3 class="project-title">Todo-приложение</h3>
+                    <p class="project-description">Приложение для управления задачами с локальным хранилищем и
+                        фильтрацией</p>
+                    <div class="project-tech">JavaScript</div>
+                </div>
+
+                <div class="project-card" data-tech="react">
+                    <div class="project-image">
+                        <img src="../images/project3.jpg" alt="Интернет-магазин" class="project-photo">
+                    </div>
+                    <h3 class="project-title">Интернет-магазин</h3>
+                    <p class="project-description">Прототип интернет-магазина с корзиной товаров и оформлением заказа
+                    </p>
+                    <div class="project-tech">React</div>
+                </div>
+
+                <div class="project-card" data-tech="html">
+                    <div class="project-image">
+                        <img src="../images/project4.jpg" alt="Портфолио" class="project-photo">
+                    </div>
+                    <h3 class="project-title">Портфолио</h3>
+                    <p class="project-description">Адаптивное портфолио на Bootstrap с сеткой проектов</p>
+                    <div class="project-tech">Bootstrap</div>
+                </div>
+            </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Контакты</p>
+        </div>
+    </footer>
+</body>
+
+</html>

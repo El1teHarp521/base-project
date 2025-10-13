@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Портфолио</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🌿</span>
+                    <span class="logo-text">Cjkjnrby Fhntv</span>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="../index.html" class="nav-link">Главная</a></li>
+                        <li><a href="projects.html" class="nav-link">Проекты</a></li>
+                        <li><a href="diary.html" class="nav-link">Дневник</a></li>
+                        <li><a href="contacts.html" class="nav-link active">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="contacts">
+        <div class="container">
+            <h1 class="section-title">Свяжитесь со мной</h1>
+            
+            <div class="contacts-content">
+                <div class="contact-form">
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="name">Имя:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение:</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Отправить сообщение</button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <h2>Контакты</h2>
+                    <div class="contact-item">
+                        <img src="../images/icons/email.svg" alt="Email" class="contact-icon">
+                        <span>student@edu.ru</span>
+                    </div>
+                    <div class="contact-item">
+                        <img src="../images/icons/github.svg" alt="GitHub" class="contact-icon">
+                        <span>GitHub: El1teHarp521</span>
+                    </div>
+                    <div class="contact-item">
+                        <img src="../images/icons/location.svg" alt="Location" class="contact-icon">
+                        <span>Москва, Россия</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Контакты</p>
+        </div>
+    </footer>
+</body>
+</html>
