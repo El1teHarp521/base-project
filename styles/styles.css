@@ -1,8 +1,20 @@
 /* Сброс стилей и базовые настройки */
+:root {
+    color-scheme: light dark;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 3rem;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
 }
 
 body {
@@ -10,13 +22,63 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #f4f4f4;
-    padding-top: 80px; /* Отступ для фиксированного хедера */
+    padding-top: 80px;
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding-inline: clamp(1rem, calc(.5rem + 1vw), 2rem);
+}
+
+/* Skip link для доступности */
+.skip-link {
+    position: absolute;
+    inset-inline-start: 1rem;
+    inset-block-start: -100%;
+    z-index: 10000;
+    padding: .5rem .75rem;
+    background: #111;
+    color: #fff;
+    border-radius: .5rem;
+    text-decoration: none;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+    inset-block-start: 1rem;
+}
+
+:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
+}
+
+a,
+button,
+input,
+textarea {
+    outline-offset: 2px;
+}
+
+/* Крупные цели на устройствах с pointer:coarse */
+@media (pointer: coarse) {
+
+    a,
+    button,
+    .nav-link {
+        min-height: 44px;
+        padding: .75rem 1rem;
+    }
 }
 
 /* Стили шапки */
@@ -24,11 +86,18 @@ body {
     background: #2c3e50;
     color: white;
     padding: 1rem 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
+
+    /* Safe areas для вырезов */
+    padding-block-start: calc(.75rem + env(safe-area-inset-top));
+    padding-block-end: .75rem;
+    padding-inline-start: calc(var(--space-md) + env(safe-area-inset-left));
+    padding-inline-end: calc(var(--space-md) + env(safe-area-inset-right));
+    isolation: isolate;
 }
 
 .header-content {
@@ -67,7 +136,7 @@ body {
 .nav-link:hover,
 .nav-link.active {
     color: #3498db;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Секция героя */
@@ -93,10 +162,11 @@ body {
     height: 200px;
     border-radius: 50%;
     border: 5px solid white;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     position: relative;
     flex-shrink: 0;
+    background: #ecf0f1;
 }
 
 .profile-photo {
@@ -142,8 +212,8 @@ body {
     flex: 1;
 }
 
-.hero-text h1 {
-    font-size: 2.5rem;
+.hero-greeting {
+    font-size: clamp(1.5rem, 1.1rem + 2vw, 2.5rem);
     margin-bottom: 10px;
 }
 
@@ -153,18 +223,20 @@ body {
     opacity: 0.9;
 }
 
-/* Кнопка */
+/* Кнопка с минимальной зоной клика */
 .btn {
     display: inline-block;
     background: #e74c3c;
     color: white;
-    padding: 12px 30px;
+    padding-inline: 1rem;
+    padding-block: max(.5rem, calc((44px - 1em)/2));
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
     transition: background 0.3s, transform 0.2s;
     border: none;
     cursor: pointer;
+    min-height: 44px;
 }
 
 .btn:hover {
@@ -180,7 +252,7 @@ body {
 
 .section-title {
     text-align: center;
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 1.1rem + 2vw, 2rem);
     margin-bottom: 40px;
     color: #2c3e50;
 }
@@ -225,15 +297,32 @@ body {
 }
 
 /* Проценты навыков */
-.html { width: 90%; }
-.javascript { width: 80%; }
-.bootstrap { width: 85%; }
-.react { width: 60%; }
+.html {
+    width: 90%;
+}
+
+.javascript {
+    width: 80%;
+}
+
+.bootstrap {
+    width: 85%;
+}
+
+.react {
+    width: 60%;
+}
 
 /* Секция проектов */
 .projects {
     background: #f8f9fa;
     padding: 60px 0;
+}
+
+.projects-area {
+    background: #f8f9fa;
+    padding: 60px 0;
+    container-type: inline-size;
 }
 
 .projects-grid {
@@ -243,61 +332,107 @@ body {
     margin-top: 40px;
 }
 
+.projects-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-top: 40px;
+}
+
+/* Контейнерные запросы */
+@supports (container-type: inline-size) {
+    @container (min-width: 640px) {
+        .projects-list {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @container (min-width: 960px) {
+        .projects-list {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+
 .project-card {
     background: white;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-width: 0;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .project-image {
     width: 100%;
-    height: 200px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    height: 180px;
     border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    background: #f8f9fa;
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
-    color: white;
-    margin-bottom: 15px;
+    border: 2px solid #ecf0f1;
+}
+
+.project-photo {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    border-radius: 4px;
 }
 
 .project-title {
     font-size: 1.3rem;
     margin-bottom: 10px;
     color: #2c3e50;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-wrap: anywhere;
 }
 
 .project-description {
     color: #666;
     margin-bottom: 15px;
     line-height: 1.5;
+    flex-grow: 1;
+    min-height: 60px;
+    overflow-wrap: anywhere;
 }
 
 .project-tech {
     background: #ecf0f1;
-    padding: 5px 15px;
+    padding: 8px 16px;
     border-radius: 20px;
     font-size: 0.9rem;
     color: #2c3e50;
     display: inline-block;
+    margin-top: auto;
 }
 
-/* Подвал */
+/* Подвал с safe areas */
 .footer {
     background: #2c3e50;
     color: white;
     text-align: center;
     padding: 20px 0;
     margin-top: 40px;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
 }
 
 /* Стили для страницы проектов с фильтрами */
@@ -324,6 +459,7 @@ body {
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.3s;
+    min-height: 44px;
 }
 
 .filter-btn.active,
@@ -345,7 +481,7 @@ body {
     background: white;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .progress-item {
@@ -376,11 +512,13 @@ body {
 
 /* Цвета статусов выполнения */
 .completed .progress-status {
-    color: #27ae60; /* Зеленый для выполненных */
+    color: #27ae60;
+    /* Зеленый для выполненных */
 }
 
 .in-progress .progress-status {
-    color: #f39c12; /* Оранжевый для в процессе */
+    color: #f39c12;
+    /* Оранжевый для в процессе */
 }
 
 .course-item {
@@ -391,6 +529,30 @@ body {
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
+}
+
+.course-name {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.course-percentage {
+    color: #666;
+    font-weight: bold;
+}
+
+.skill-bar {
+    background: #ecf0f1;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    border-radius: 5px;
+    transition: width 1s ease-in-out;
 }
 
 /* Стили для страницы контактов */
@@ -405,7 +567,7 @@ body {
     background: white;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
@@ -439,7 +601,7 @@ body {
     background: white;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     height: fit-content;
 }
 
@@ -471,121 +633,35 @@ body {
     transform: scale(1.1);
 }
 
-/* Адаптивный дизайн */
-@media (max-width: 768px) {
-    body {
-        padding-top: 70px;
-    }
-    
-    .header-content {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .nav-list {
-        gap: 15px;
-    }
-    
-    .hero-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 30px;
-    }
-    
-    .hero-text {
-        text-align: center;
-    }
-    
-    .profile-image {
-        width: 150px;
-        height: 150px;
-    }
-    
-    .photo-placeholder {
-        font-size: 36px;
-    }
-    
-    .hero-text h1 {
-        font-size: 2rem;
-    }
-    
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .projects-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .diary-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .contacts-content {
-        grid-template-columns: 1fr;
+/* Уважение к снижению движения */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
     }
 }
 
-@media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
-    
-    .nav-list {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-    
-    .hero {
-        padding: 50px 0;
-    }
-    
-    .section-title {
-        font-size: 1.5rem;
-    }
-    
-    .profile-image {
-        width: 120px;
-        height: 120px;
-        border-width: 3px;
-    }
-    
-    .photo-placeholder {
-        font-size: 28px;
+/* Повышенный контраст */
+@media (prefers-contrast: more) {
+
+    .btn,
+    .nav-link,
+    .filter-btn {
+        box-shadow: inset 0 0 0 2px #fff;
     }
 }
 
-/* Стили для печати */
-@media print {
-    .profile-photo {
-        filter: grayscale(100%);
-    }
-    
-    .contact-icon {
-        filter: grayscale(100%);
-    }
-}
-/* Контейнер для круглой фотографии */
-.profile-image {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    border: 5px solid white;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+/* Визуально скрытые элементы */
+.visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
     overflow: hidden;
-    position: relative;
-    flex-shrink: 0;
-    background: #ecf0f1; /* Фон на случай если фото не загрузится */
-}
-
-.profile-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 /* Простой плейсхолдер */
@@ -602,12 +678,13 @@ body {
     font-size: 48px;
     color: white;
 }
+
 /* Контейнеры для фотографий проектов */
 .project-image {
     width: 100%;
     height: 200px;
     border-radius: 8px;
-    overflow: hidden; /* Обрезает выходящие за границы части */
+    overflow: hidden;
     position: relative;
     background: linear-gradient(135deg, #667eea, #764ba2);
     margin-bottom: 15px;
@@ -616,8 +693,8 @@ body {
 .project-photo {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Заполняет контейнер без искажений */
-    object-position: center center; /* Центрирует изображение */
+    object-fit: cover;
+    object-position: center center;
     display: block;
 }
 
@@ -637,37 +714,14 @@ body {
 
 /* Специфичные настройки для разных типов фото */
 .profile-photo.portrait {
-    object-position: center 25%; /* Для портретных фото смещаем выше */
+    object-position: center 25%;
 }
 
 .profile-photo.landscape {
-    object-fit: contain; /* Для пейзажных фото показываем полностью */
-    background: #ecf0f1; /* Фон если фото меньше контейнера */
+    object-fit: contain;
+    background: #ecf0f1;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-    .profile-image {
-        width: 150px;
-        height: 150px;
-    }
-    
-    .project-image {
-        height: 180px;
-    }
-}
-
-@media (max-width: 480px) {
-    .profile-image {
-        width: 120px;
-        height: 120px;
-        border-width: 3px;
-    }
-    
-    .project-image {
-        height: 160px;
-    }
-}
 /* Универсальное решение для разных размеров фото */
 .project-image {
     width: 100%;
@@ -675,7 +729,7 @@ body {
     border-radius: 8px;
     overflow: hidden;
     position: relative;
-    background: linear-gradient(135deg, #667eea, #764ba2); /* Красивый фон */
+    background: linear-gradient(135deg, #667eea, #764ba2);
     margin-bottom: 15px;
     display: flex;
     align-items: center;
@@ -689,82 +743,102 @@ body {
     object-position: center;
     display: block;
     border-radius: 4px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-/* Исправленные стили для карточек проектов */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.project-card {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* Фиксируем высоту карточки */
+/* Стили для печати */
+@media print {
+    .profile-photo {
+        filter: grayscale(100%);
+    }
+
+    .contact-icon {
+        filter: grayscale(100%);
+    }
 }
 
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+/* Адаптивный дизайн */
+@media (max-width: 768px) {
+    body {
+        padding-top: 70px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-list {
+        gap: 15px;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .hero-text {
+        text-align: center;
+    }
+
+    .profile-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .photo-placeholder {
+        font-size: 36px;
+    }
+
+    .hero-greeting {
+        font-size: 2rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .diary-content {
+        grid-template-columns: 1fr;
+    }
+
+    .contacts-content {
+        grid-template-columns: 1fr;
+    }
 }
 
-/* ФИКС: Единообразные контейнеры для фото */
-.project-image {
-    width: 100%;
-    height: 180px; /* Фиксированная высота для всех */
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-    background: #f8f9fa; /* Светлый фон */
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #ecf0f1;
-}
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
 
-/* ФИКС: Универсальное отображение фото */
-.project-photo {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain; /* Показываем всё фото без обрезки */
-    object-position: center;
-    display: block;
-    border-radius: 4px;
-}
+    .nav-list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
 
-.project-title {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-    color: #2c3e50;
-    min-height: 40px; /* Фиксируем высоту заголовка */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .hero {
+        padding: 50px 0;
+    }
 
-.project-description {
-    color: #666;
-    margin-bottom: 15px;
-    line-height: 1.5;
-    flex-grow: 1; /* Растягиваем описание */
-    min-height: 60px; /* Минимальная высота для текста */
-}
+    .section-title {
+        font-size: 1.5rem;
+    }
 
-.project-tech {
-    background: #ecf0f1;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    color: #2c3e50;
-    display: inline-block;
-    margin-top: auto; /* Прижимаем технологии к низу */
+    .profile-image {
+        width: 120px;
+        height: 120px;
+        border-width: 3px;
+    }
+
+    .photo-placeholder {
+        font-size: 28px;
+    }
 }

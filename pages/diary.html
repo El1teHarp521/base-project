@@ -2,12 +2,14 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Учебный дневник - Портфолио</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
 <body>
+    <a class="skip-link" href="#main">Перейти к основному содержимому</a>
+    
     <header class="header">
         <div class="container">
             <div class="header-content">
@@ -15,7 +17,7 @@
                     <span class="logo-icon">🌿</span>
                     <span class="logo-text">Солоткин Артем</span>
                 </div>
-                <nav class="nav">
+                <nav class="nav" aria-label="Основная навигация">
                     <ul class="nav-list">
                         <li><a href="../index.html" class="nav-link">Главная</a></li>
                         <li><a href="projects.html" class="nav-link">Проекты</a></li>
@@ -27,70 +29,72 @@
         </div>
     </header>
 
-    <section class="diary">
-        <div class="container">
-            <h1 class="section-title">Мой учебный прогресс</h1>
-            
-            <div class="diary-content">
-                <div class="progress-list">
-                    <h2>История обучения</h2>
-                    <div class="progress-item completed">
-                        <span class="progress-date">15 дек</span>
-                        <span class="progress-task">Верстка макета сайта</span>
-                        <span class="progress-status">✓</span>
-                    </div>
-                    <div class="progress-item completed">
-                        <span class="progress-date">10 дек</span>
-                        <span class="progress-task">JavaScript основы</span>
-                        <span class="progress-status">✓</span>
-                    </div>
-                    <div class="progress-item in-progress">
-                        <span class="progress-date">05 дек</span>
-                        <span class="progress-task">Работа с формами</span>
-                        <span class="progress-status">⏳</span>
-                    </div>
-                    <div class="progress-item in-progress">
-                        <span class="progress-date">01 дек</span>
-                        <span class="progress-task">Адаптивный дизайн</span>
-                        <span class="progress-status">⏳</span>
-                    </div>
-                </div>
+    <main id="main" class="main">
+        <section class="diary">
+            <div class="container">
+                <h1 class="section-title">Мой учебный прогресс</h1>
                 
-                <div class="current-courses">
-                    <h2>Текущие курсы</h2>
-                    <div class="course-item">
-                        <div class="course-header">
-                            <span class="course-name">Веб-разработка</span>
-                            <span class="course-percentage">90%</span>
+                <div class="diary-content">
+                    <div class="progress-list">
+                        <h2>История обучения</h2>
+                        <div class="progress-item completed">
+                            <span class="progress-date">15 дек</span>
+                            <span class="progress-task">Верстка макета сайта</span>
+                            <span class="progress-status">✓</span>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%"></div>
+                        <div class="progress-item completed">
+                            <span class="progress-date">10 дек</span>
+                            <span class="progress-task">JavaScript основы</span>
+                            <span class="progress-status">✓</span>
                         </div>
-                    </div>
-                    <div class="course-item">
-                        <div class="course-header">
-                            <span class="course-name">JavaScript</span>
-                            <span class="course-percentage">70%</span>
+                        <div class="progress-item in-progress">
+                            <span class="progress-date">05 дек</span>
+                            <span class="progress-task">Работа с формами</span>
+                            <span class="progress-status">⏳</span>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 70%"></div>
-                        </div>
-                    </div>
-                    <div class="course-item">
-                        <div class="course-header">
-                            <span class="course-name">React</span>
-                            <span class="course-percentage">50%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 50%"></div>
+                        <div class="progress-item in-progress">
+                            <span class="progress-date">01 дек</span>
+                            <span class="progress-task">Адаптивный дизайн</span>
+                            <span class="progress-status">⏳</span>
                         </div>
                     </div>
                     
-                    <button class="btn" style="margin-top: 20px;">Добавить запись</button>
+                    <div class="current-courses">
+                        <h2>Текущие курсы</h2>
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">Веб-разработка</span>
+                                <span class="course-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">JavaScript</span>
+                                <span class="course-percentage">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="course-item">
+                            <div class="course-header">
+                                <span class="course-name">React</span>
+                                <span class="course-percentage">50%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 50%"></div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn" style="margin-top: 20px;">Добавить запись</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer class="footer">
         <div class="container">

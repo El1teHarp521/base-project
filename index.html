@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Портфолио студента-разработчика</title>
     <link rel="stylesheet" href="styles/styles.css">
     <script src="scripts/main.js"></script>
@@ -11,6 +11,8 @@
 </head>
 
 <body>
+    <a class="skip-link" href="#main">Перейти к основному содержимому</a>
+
     <!-- хэдер -->
     <header class="header">
         <div class="container">
@@ -19,7 +21,7 @@
                     <span class="logo-icon">🌿</span>
                     <span class="logo-text">Солоткин Артем</span>
                 </div>
-                <nav class="nav">
+                <nav class="nav" aria-label="Основная навигация">
                     <ul class="nav-list">
                         <li><a href="index.html" class="nav-link active">Главная</a></li>
                         <li><a href="pages/projects.html" class="nav-link">Проекты</a></li>
@@ -31,107 +33,114 @@
         </div>
     </header>
 
-    <!-- обо мне -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="profile-image">
-                    <img src="images/photo.jpg" alt="Фото студента" class="profile-photo">
-                    <div class="photo-placeholder">👤</div>
-                </div>
-                <div class="hero-text">
-                    <h1>Привет! Я Студент</h1>
-                    <p>Факультет ИT, группа ЭФБО-15-24</p>
-                    <p>Увлекаюсь веб-разработкой</p>
-                    <h3>Кричалка</h3>
-                    <p>🐲ЗВЕРЯ НЕТ 🐉СИЛЬНЕЙ 🐉ДРАКОНА 🐉 СПИРИТ 🐉ГОРДОСТЬ РЕГИОНА🐉</p>
-                    <p>🐲ТИМЫ🐉🐲НЕТ🐉🐲СИЛЬНЕЕ🐉🐲В МИРЕ🐉🐲 ЭТОТ🐉🐲МАТЧ🐉🐲ВОЗЬМУТ🐉🐲TEAM SPIRIT🐉</p>
-                    <p>🐲СНГ🐉🐲ПОРВЕТ🐉🐲ЛЮБОГО🐉🐲СГИНЬТЕ🐉🐲В ПЛАМЕНИ🐉🐲ДРАКОНА</p>
-                    <a href="../assets/resume.pdf" class="btn" download>Скачать резюме</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- навыки -->
-    <section class="skills">
-        <div class="container">
-            <h2 class="section-title">Мои навыки</h2>
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <span class="skill-name">HTML/CSS</span>
-                        <span class="skill-percentage">90%</span>
+    <!-- основное содержимое -->
+    <main id="main" class="main">
+        <!-- обо мне -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="profile-image">
+                        <img src="images/photo.jpg" alt="Фото студента" class="profile-photo" width="200" height="200"
+                            fetchpriority="high">
+                        <div class="photo-placeholder">👤</div>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress html"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <span class="skill-name">JavaScript</span>
-                        <span class="skill-percentage">80%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress javascript"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <span class="skill-name">Bootstrap</span>
-                        <span class="skill-percentage">85%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress bootstrap"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <span class="skill-name">React</span>
-                        <span class="skill-percentage">60%</span>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-progress react"></div>
+                    <div class="hero-text">
+                        <h1 class="hero-greeting">Привет! Я Студент</h1>
+                        <p>Факультет ИT, группа ЭФБО-15-24</p>
+                        <p>Увлекаюсь веб-разработкой</p>
+                        <h3>Кричалка</h3>
+                        <p>🐲ЗВЕРЯ НЕТ 🐉СИЛЬНЕЙ 🐉ДРАКОНА 🐉 СПИРИТ 🐉ГОРДОСТЬ РЕГИОНА🐉</p>
+                        <p>🐲ТИМЫ🐉🐲НЕТ🐉🐲СИЛЬНЕЕ🐉🐲В МИРЕ🐉🐲 ЭТОТ🐉🐲МАТЧ🐉🐲ВОЗЬМУТ🐉🐲TEAM SPIRIT🐉</p>
+                        <p>🐲СНГ🐉🐲ПОРВЕТ🐉🐲ЛЮБОГО🐉🐲СГИНЬТЕ🐉🐲В ПЛАМЕНИ🐉🐲ДРАКОНА</p>
+                        <a href="assets/resume.pdf" class="btn" download>Скачать резюме</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- секции -->
-    <section class="projects">
-        <div class="container">
-            <h2 class="section-title">Лучшие проекты</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="images/project1.jpg" alt="Личный сайт" class="project-photo">
+        <!-- навыки -->
+        <section class="skills">
+            <div class="container">
+                <h2 class="section-title">Мои навыки</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">HTML/CSS</span>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress html"></div>
+                        </div>
                     </div>
-                    <h3 class="project-title">Личный сайт</h3>
-                    <p class="project-description">Адаптивный сайт-визитка с современным дизайном</p>
-                    <div class="project-tech">HTML, CSS, JavaScript</div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="images/project2.jpg" alt="Todo-приложение" class="project-photo">
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">JavaScript</span>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress javascript"></div>
+                        </div>
                     </div>
-                    <h3 class="project-title">Todo-приложение</h3>
-                    <p class="project-description">Приложение для управления задачами с локальным хранилищем</p>
-                    <div class="project-tech">JavaScript, LocalStorage</div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="images/project3.jpg" alt="Интернет-магазин" class="project-photo">
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Bootstrap</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress bootstrap"></div>
+                        </div>
                     </div>
-                    <h3 class="project-title">Интернет-магазин</h3>
-                    <p class="project-description">Прототип интернет-магазина с корзиной товаров</p>
-                    <div class="project-tech">React, Node.js</div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">React</span>
+                            <span class="skill-percentage">60%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress react"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- проекты -->
+        <section class="projects-area">
+            <div class="container">
+                <h2 class="section-title">Лучшие проекты</h2>
+                <div class="projects-list">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/project1.jpg" alt="Личный сайт" class="project-photo" width="400"
+                                height="225" loading="lazy" decoding="async">
+                        </div>
+                        <h3 class="project-title">Личный сайт</h3>
+                        <p class="project-description">Адаптивный сайт-визитка с современным дизайном</p>
+                        <div class="project-tech">HTML, CSS, JavaScript</div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/project2.jpg" alt="Todo-приложение" class="project-photo" width="400"
+                                height="225" loading="lazy" decoding="async">
+                        </div>
+                        <h3 class="project-title">Todo-приложение</h3>
+                        <p class="project-description">Приложение для управления задачами с локальным хранилищем</p>
+                        <div class="project-tech">JavaScript, LocalStorage</div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="images/project3.jpg" alt="Интернет-магазин" class="project-photo" width="400"
+                                height="225" loading="lazy" decoding="async">
+                        </div>
+                        <h3 class="project-title">Интернет-магазин</h3>
+                        <p class="project-description">Прототип интернет-магазина с корзиной товаров</p>
+                        <div class="project-tech">React, Node.js</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- футер -->
     <footer class="footer">
