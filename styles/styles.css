@@ -842,3 +842,69 @@ textarea {
         font-size: 28px;
     }
 }
+
+/* Дополнительные стили для адаптивных изображений */
+
+/* Стили для эмодзи-замены иконок */
+.contact-emoji {
+    font-size: 24px;
+    margin-right: 15px;
+}
+
+/* Плавные переходы для фильтрации проектов */
+.project-card {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Стили для ленивой загрузки */
+img.lazy {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+img.lazy.loaded {
+    opacity: 1;
+}
+
+/* Оптимизация для медленных соединений */
+@media (prefers-reduced-data: reduce) {
+    img:not([data-essential]) {
+        display: none;
+    }
+
+    .project-image:not(.essential) {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        min-height: 200px;
+    }
+}
+
+/* Поддержка разных плотностей пикселей */
+.contact-icon {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Адаптивность для очень маленьких экранов */
+@media (max-width: 320px) {
+    .profile-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .project-image {
+        height: 120px;
+    }
+}
+
+/* Поддержка ориентации устройства */
+@media (orientation: landscape) and (max-height: 500px) {
+    .hero-content {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+}

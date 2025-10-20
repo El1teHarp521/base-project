@@ -7,14 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
         imgElement.style.maxHeight = '100%';
         imgElement.style.objectFit = 'cover';
         imgElement.style.objectPosition = 'center';
-
-        const containerWidth = container.offsetWidth;
-        const containerHeight = container.offsetHeight;
-
-        if (imgElement.naturalWidth > containerWidth || imgElement.naturalHeight > containerHeight) {
-            imgElement.style.width = '100%';
-            imgElement.style.height = '100%';
-        }
     }
 
     // Обработка загрузки фото профиля
@@ -29,11 +21,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         profilePhoto.onerror = function () {
             console.error('Ошибка загрузки фото профиля: ' + this.src);
+            // Показываем плейсхолдер если фото не загрузилось
+            const placeholder = profileImage.querySelector('.photo-placeholder');
+            if (placeholder) {
+                placeholder.style.opacity = '1';
+            }
         };
-
-        if (profilePhoto.complete && profilePhoto.naturalHeight !== 0) {
-            fixImageBounds(profilePhoto, profileImage);
-        }
     }
 
     // Обработка загрузки фото проектов
@@ -49,34 +42,63 @@ document.addEventListener('DOMContentLoaded', function () {
 
             photo.onerror = function () {
                 console.error('Ошибка загрузки фото проекта: ' + this.src);
+                // Устанавливаем градиентный фон если фото не загрузилось
+                projectImage.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                projectImage.innerHTML = '<div style="color: white; text-align: center; padding: 20px;">Изображение не загружено</div>';
             };
-
-            if (photo.complete && photo.naturalHeight !== 0) {
-                fixImageBounds(photo, projectImage);
-            }
         }
+    });
+
+    // Обработка загрузки иконок контактов
+    const contactIcons = document.querySelectorAll('.contact-icon');
+    contactIcons.forEach((icon) => {
+        icon.onerror = function () {
+            console.error('Ошибка загрузки иконки: ' + this.src);
+            // Заменяем сломанную иконку на эмодзи
+            const alt = this.getAttribute('alt');
+            let emoji = '📧';
+            if (alt.includes('GitHub')) emoji = '🐙';
+            if (alt.includes('местоположения')) emoji = '📍';
+            this.style.display = 'none';
+            const emojiSpan = document.createElement('span');
+            emojiSpan.className = 'contact-emoji';
+            emojiSpan.textContent = emoji;
+            this.parentNode.insertBefore(emojiSpan, this);
+        };
     });
 
     // Обработка фильтров на странице проектов
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
 
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const filter = button.dataset.filter;
+    if (filterButtons.length > 0 && projectCards.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.dataset.filter;
 
-            // Обновляем активную кнопку
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
+                // Обновляем активную кнопку
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
 
-            // Фильтруем проекты
-            projectCards.forEach(card => {
-                if (filter === 'all' || card.dataset.tech === filter) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+                // Фильтруем проекты
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.tech === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
             });
         });
-    });
+    }
+
+    // Обработка отправки формы
+    const contactForm = document.querySelector('.contact-form form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Сообщение отправлено! (Это демо-версия)');
+            this.reset();
+        });
+    }
 });
