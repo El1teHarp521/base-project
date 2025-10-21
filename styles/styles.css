@@ -24,8 +24,6 @@ body {
     background-color: #f4f4f4;
     padding-top: 80px;
     min-height: 100vh;
-    min-height: 100svh;
-    min-height: 100dvh;
     display: flex;
     flex-direction: column;
 }
@@ -81,7 +79,7 @@ textarea {
     }
 }
 
-/* Стили шапки */
+/* Стили шапки - БЕЗОПАСНЫЕ ОБЛАСТИ ОТКЛЮЧЕНЫ */
 .header {
     background: #2c3e50;
     color: white;
@@ -91,19 +89,34 @@ textarea {
     width: 100%;
     top: 0;
     z-index: 1000;
-
-    /* Safe areas для вырезов */
-    padding-block-start: calc(.75rem + env(safe-area-inset-top));
-    padding-block-end: .75rem;
-    padding-inline-start: calc(var(--space-md) + env(safe-area-inset-left));
-    padding-inline-end: calc(var(--space-md) + env(safe-area-inset-right));
-    isolation: isolate;
+    /* Принудительно игнорируем безопасные области */
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
 }
 
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(1rem, calc(.5rem + 1vw), 2rem);
+}
+
+.main {
+    margin-top: 80px;
+}
+
+/* На мобильных - небольшие отступы, но без safe-area */
+@media (max-width: 768px) {
+    .header {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .main {
+        margin-top: 70px;
+    }
 }
 
 .logo {
@@ -359,12 +372,13 @@ textarea {
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: all 0.3s ease;
     text-align: center;
     display: flex;
     flex-direction: column;
     height: 100%;
     min-width: 0;
+    cursor: pointer;
 }
 
 .project-card:hover {
@@ -425,14 +439,13 @@ textarea {
     margin-top: auto;
 }
 
-/* Подвал с safe areas */
+/* Подвал */
 .footer {
     background: #2c3e50;
     color: white;
     text-align: center;
     padding: 20px 0;
     margin-top: 40px;
-    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
 }
 
 /* Стили для страницы проектов с фильтрами */
@@ -541,20 +554,6 @@ textarea {
     font-weight: bold;
 }
 
-.skill-bar {
-    background: #ecf0f1;
-    height: 10px;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.skill-progress {
-    height: 100%;
-    background: linear-gradient(90deg, #3498db, #2980b9);
-    border-radius: 5px;
-    transition: width 1s ease-in-out;
-}
-
 /* Стили для страницы контактов */
 .contacts-content {
     display: grid;
@@ -631,6 +630,132 @@ textarea {
 
 .contact-item:hover .contact-icon {
     transform: scale(1.1);
+}
+
+/* Стили для модального окна - компактная версия */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    max-width: 500px;
+    max-height: 70vh;
+    width: 90%;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #666;
+    cursor: pointer;
+    z-index: 10;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    max-height: calc(70vh - 3rem);
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.modal-image {
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 200px;
+}
+
+.modal-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.modal-description {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    color: #555;
+    text-align: center;
+}
+
+.modal-tech {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.tech-tag {
+    background: #3498db;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 /* Уважение к снижению движения */
@@ -757,6 +882,59 @@ textarea {
     }
 }
 
+/* Адаптивность модального окна */
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 95%;
+        max-height: 80vh;
+        width: 95%;
+        margin: 1rem;
+    }
+
+    .modal-body {
+        padding: 1.2rem;
+        max-height: calc(80vh - 2.4rem);
+    }
+
+    .modal-title {
+        font-size: 1.3rem;
+    }
+
+    .modal-image {
+        height: 150px;
+    }
+
+    .modal-close {
+        top: 8px;
+        right: 12px;
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-body {
+        padding: 1rem;
+    }
+
+    .modal-title {
+        font-size: 1.2rem;
+    }
+
+    .modal-image {
+        height: 120px;
+    }
+
+    .tech-tag {
+        font-size: 0.8rem;
+        padding: 0.2rem 0.6rem;
+    }
+}
+
+/* Предотвращение скролла тела при открытом модальном окне */
+body.modal-open {
+    overflow: hidden;
+}
+
 /* Адаптивный дизайн */
 @media (max-width: 768px) {
     body {
@@ -843,68 +1021,8 @@ textarea {
     }
 }
 
-/* Дополнительные стили для адаптивных изображений */
-
 /* Стили для эмодзи-замены иконок */
 .contact-emoji {
     font-size: 24px;
     margin-right: 15px;
-}
-
-/* Плавные переходы для фильтрации проектов */
-.project-card {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* Стили для ленивой загрузки */
-img.lazy {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-img.lazy.loaded {
-    opacity: 1;
-}
-
-/* Оптимизация для медленных соединений */
-@media (prefers-reduced-data: reduce) {
-    img:not([data-essential]) {
-        display: none;
-    }
-
-    .project-image:not(.essential) {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        min-height: 200px;
-    }
-}
-
-/* Поддержка разных плотностей пикселей */
-.contact-icon {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-}
-
-/* Адаптивность для очень маленьких экранов */
-@media (max-width: 320px) {
-    .profile-image {
-        width: 100px;
-        height: 100px;
-    }
-
-    .project-image {
-        height: 120px;
-    }
-}
-
-/* Поддержка ориентации устройства */
-@media (orientation: landscape) and (max-height: 500px) {
-    .hero-content {
-        flex-direction: row;
-        gap: 20px;
-    }
-
-    .profile-image {
-        width: 120px;
-        height: 120px;
-    }
 }
