@@ -79,7 +79,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         profilePhoto.onerror = function () {
             console.error('Ошибка загрузки фото профиля: ' + this.src);
-            // Показываем плейсхолдер если фото не загрузилось
             const placeholder = profileImage.querySelector('.photo-placeholder');
             if (placeholder) {
                 placeholder.style.opacity = '1';
@@ -119,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function () {
     contactIcons.forEach((icon) => {
         icon.onerror = function () {
             console.error('Ошибка загрузки иконки: ' + this.src);
-            // Заменяем сломанную иконку на эмодзи
             const alt = this.getAttribute('alt');
             let emoji = '📧';
             if (alt.includes('GitHub')) emoji = '🐙';
@@ -137,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const projectCards = document.querySelectorAll('.project-card');
 
     if (filterButtons.length > 0 && projectCards.length > 0) {
-        // Добавляем ARIA-атрибуты для фильтров
+        //ARIA-атрибуты для фильтров
         filterButtons.forEach((button, index) => {
             button.setAttribute('role', 'button');
             button.setAttribute('aria-pressed', button.classList.contains('active'));
@@ -154,16 +152,12 @@ document.addEventListener('DOMContentLoaded', function () {
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const filter = button.dataset.filter;
-
-                // Обновляем активную кнопку
                 filterButtons.forEach(btn => {
                     btn.classList.remove('active');
                     btn.setAttribute('aria-pressed', 'false');
                 });
                 button.classList.add('active');
                 button.setAttribute('aria-pressed', 'true');
-
-                // Фильтруем проекты
                 let visibleCount = 0;
                 projectCards.forEach(card => {
                     if (filter === 'all' || card.dataset.tech === filter) {
@@ -259,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const modalClose = modal.querySelector('.modal-close');
         const projectCards = document.querySelectorAll('.project-card');
 
-        // Добавляем ARIA-атрибуты для модального окна
+        //ARIA-атрибуты для модального окна
         modal.setAttribute('role', 'dialog');
         modal.setAttribute('aria-modal', 'true');
         modal.setAttribute('aria-labelledby', 'modal-title');
@@ -309,21 +303,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 techTags.appendChild(tag);
             });
 
-            // Запоминаем активный элемент для возврата фокуса
             previousActiveElement = document.activeElement;
 
-            // Скрываем основной контент от скринридера
             document.querySelectorAll('body > *:not(.modal):not(.overlay)')
                 .forEach(el => el.setAttribute('aria-hidden', 'true'));
 
-            // Показываем модальное окно
             modal.style.display = 'flex';
             document.body.classList.add('modal-open');
 
-            // Фокусируемся на модальном окне
             modal.focus();
 
-            // Добавляем обработчик Escape
             document.addEventListener('keydown', handleEscape);
 
             // Анимация появления
@@ -337,16 +326,13 @@ document.addEventListener('DOMContentLoaded', function () {
             modal.classList.remove('active');
             document.body.classList.remove('modal-open');
 
-            // Возвращаем видимость основному контенту
             document.querySelectorAll('[aria-hidden="true"]')
                 .forEach(el => el.removeAttribute('aria-hidden'));
 
-            // Возвращаем фокус на предыдущий элемент
             if (previousActiveElement) {
                 previousActiveElement.focus();
             }
 
-            // Убираем обработчик Escape
             document.removeEventListener('keydown', handleEscape);
 
             setTimeout(() => {
@@ -397,8 +383,6 @@ document.addEventListener('DOMContentLoaded', function () {
             e.stopPropagation();
         });
     }
-
-    // Инициализируем модальное окно если есть проекты
     if (document.querySelector('.project-card')) {
         initModal();
     }
@@ -426,8 +410,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 showSuccessMessage(contactForm, 'Сообщение успешно отправлено! Мы свяжемся с вами в ближайшее время.');
                 contactForm.reset();
                 clearAllErrors(contactForm);
-
-                // Фокусируемся на первом поле после успешной отправки
                 setTimeout(() => {
                     nameInput?.focus();
                 }, 100);
@@ -528,8 +510,6 @@ document.addEventListener('DOMContentLoaded', function () {
         input.setAttribute('aria-invalid', 'true');
         errorElement.textContent = message;
         input.classList.add('error');
-
-        // Добавляем визуальный индикатор ошибки
         if (!input.parentNode.querySelector('.error-indicator')) {
             const errorIndicator = document.createElement('span');
             errorIndicator.className = 'error-indicator';
@@ -543,8 +523,6 @@ document.addEventListener('DOMContentLoaded', function () {
         input.setAttribute('aria-invalid', 'false');
         errorElement.textContent = '';
         input.classList.remove('error');
-
-        // Убираем визуальный индикатор ошибки
         const errorIndicator = input.parentNode.querySelector('.error-indicator');
         if (errorIndicator) {
             errorIndicator.remove();
@@ -650,7 +628,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Инициализация захвата фокуса на странице
     initFocusTrap();
 
-    // Добавляем tabindex к основному контенту для улучшения навигации
     const mainContent = document.getElementById('main-content');
     if (mainContent && !mainContent.hasAttribute('tabindex')) {
         mainContent.setAttribute('tabindex', '-1');
@@ -659,7 +636,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('All accessibility features initialized');
 });
 
-// Вспомогательные CSS классы для доступности (добавляются динамически)
+// Вспомогательные CSS классы для доступности
 const accessibilityStyles = `
 .visually-hidden {
     position: absolute !important;
@@ -737,7 +714,6 @@ if (document.head) {
 
 // Альтернативный вариант захвата фокуса с созданием скрытых элементов
 function createFocusTrapElements() {
-    // Создаем скрытые элементы в начале и конце страницы
     const trapStart = document.createElement('div');
     trapStart.className = 'focus-trap';
     trapStart.setAttribute('tabindex', '0');
@@ -753,8 +729,6 @@ function createFocusTrapElements() {
     trapStart.style.border = '0';
 
     const trapEnd = trapStart.cloneNode(true);
-
-    // Вставляем в начало и конец body
     document.body.insertBefore(trapStart, document.body.firstChild);
     document.body.appendChild(trapEnd);
 

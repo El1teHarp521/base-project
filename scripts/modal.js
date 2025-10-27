@@ -1,6 +1,3 @@
-// modal.js (дополнить существующий код)
-// Функции для доступного модального окна
-
 function initAccessibleModal() {
     const modal = document.getElementById('project-modal');
     if (!modal) return;

@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="color-scheme" content="dark">
-    <title>Контакты - Портфолио Солоткин Артем</title>
+    <meta name="description"
+        content="Свяжитесь со мной - Солоткин Артем. Форма обратной связи и контактная информация.">
+    <title>Контакты - Портфолио Солоткин Артем | Свяжитесь со мной</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
@@ -40,7 +42,11 @@
                 <div class="contacts-content">
                     <div class="contact-form" role="form" aria-labelledby="form-title">
                         <h2 id="form-title" class="visually-hidden">Форма обратной связи</h2>
-                        <form class="form" id="contact-form" novalidate>
+                        <form class="form" id="contact-form" novalidate aria-describedby="form-description">
+                            <p id="form-description" class="visually-hidden">
+                                Заполните форму обратной связи. Все поля обязательны для заполнения.
+                            </p>
+
                             <fieldset>
                                 <legend class="visually-hidden">Персональная информация</legend>
 
@@ -52,7 +58,7 @@
                                     </label>
                                     <input type="text" id="name" name="name" required aria-required="true"
                                         aria-describedby="name-hint name-error" autocomplete="name"
-                                        placeholder="Введите ваше имя">
+                                        placeholder="Введите ваше полное имя">
                                     <small id="name-hint" class="form-hint">
                                         Введите ваше полное имя
                                     </small>
@@ -110,21 +116,24 @@
                         <h2 id="contact-info-title">Контакты</h2>
                         <div class="contact-list" role="list">
                             <div class="contact-item" role="listitem">
-                                <img src="../images/icons/email.svg" alt="" class="contact-icon" aria-hidden="true">
+                                <img src="../images/icons/email.svg" alt="" class="contact-icon" aria-hidden="true"
+                                    width="24" height="24">
                                 <span>
                                     <span class="visually-hidden">Электронная почта: </span>
                                     student@edu.ru
                                 </span>
                             </div>
                             <div class="contact-item" role="listitem">
-                                <img src="../images/icons/github.svg" alt="" class="contact-icon" aria-hidden="true">
+                                <img src="../images/icons/github.svg" alt="" class="contact-icon" aria-hidden="true"
+                                    width="24" height="24">
                                 <span>
-                                    <span class="visually-hidden">GitHub: </span>
+                                    <span class="visually-hidden">GitHub профиль: </span>
                                     El1teHarp521
                                 </span>
                             </div>
                             <div class="contact-item" role="listitem">
-                                <img src="../images/icons/location.svg" alt="" class="contact-icon" aria-hidden="true">
+                                <img src="../images/icons/location.svg" alt="" class="contact-icon" aria-hidden="true"
+                                    width="24" height="24">
                                 <span>
                                     <span class="visually-hidden">Местоположение: </span>
                                     Москва, Россия

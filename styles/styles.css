@@ -1474,3 +1474,72 @@ legend {
         transform: translateY(-4px);
     }
 }
+
+/* Улучшение контрастности для формы */
+.required-field {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-accent);
+}
+
+.required-star {
+    color: var(--color-error);
+    margin-left: 4px;
+}
+
+.form-hint {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    display: block;
+    margin-top: var(--space-xs);
+    line-height: var(--line-height-relaxed);
+}
+
+.error-message {
+    color: var(--color-error);
+    font-size: var(--font-size-sm);
+    display: block;
+    margin-top: var(--space-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Улучшение видимости состояний */
+input:not(:placeholder-shown):valid {
+    border-color: var(--color-success);
+}
+
+input:not(:placeholder-shown):invalid {
+    border-color: var(--color-error);
+}
+
+/* Фокус для fieldset */
+fieldset:focus-within {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Улучшение доступности для кнопки */
+.btn-primary:focus {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+    background: var(--color-accent);
+    color: var(--color-text-primary);
+}
+
+/* Улучшение контрастности текста */
+.contact-item span {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-base);
+}
+
+/* Улучшение доступности навигации */
+.nav-link.active {
+    background: var(--color-accent);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.nav-link:focus {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}

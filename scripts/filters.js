@@ -1,12 +1,9 @@
-// filters.js (дополнить существующий код)
-// Улучшения доступности для фильтров
-
 function initAccessibleFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
 
     if (filterButtons.length > 0 && projectCards.length > 0) {
-        // Добавляем ARIA-атрибуты для фильтров
+        // ARIA-атрибуты для фильтров
         filterButtons.forEach((button, index) => {
             button.setAttribute('role', 'button');
             button.setAttribute('aria-pressed', button.classList.contains('active'));
@@ -23,16 +20,12 @@ function initAccessibleFilters() {
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const filter = button.dataset.filter;
-
-                // Обновляем активную кнопку
                 filterButtons.forEach(btn => {
                     btn.classList.remove('active');
                     btn.setAttribute('aria-pressed', 'false');
                 });
                 button.classList.add('active');
                 button.setAttribute('aria-pressed', 'true');
-
-                // Фильтруем проекты
                 let visibleCount = 0;
                 projectCards.forEach(card => {
                     if (filter === 'all' || card.dataset.tech === filter) {
@@ -44,8 +37,6 @@ function initAccessibleFilters() {
                         card.setAttribute('aria-hidden', 'true');
                     }
                 });
-
-                // Обновляем live region с количеством найденных проектов
                 updateFilterResults(visibleCount, projectCards.length);
             });
 

@@ -1,6 +1,3 @@
-// form-validation.js
-// Общие функции валидации форм
-
 function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -74,7 +71,6 @@ function initContactFormValidation() {
             contactForm.reset();
             clearAllErrors(contactForm);
 
-            // Фокусируемся на первом поле после успешной отправки
             setTimeout(() => {
                 nameInput?.focus();
             }, 100);
@@ -96,7 +92,6 @@ function initContactFormValidation() {
     });
 }
 
-// Специфичные функции валидации для контактной формы
 function validateContactName() {
     const nameInput = document.getElementById('name');
     const errorElement = document.getElementById('name-error');
