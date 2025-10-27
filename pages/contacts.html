@@ -4,77 +4,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Контакты - Портфолио</title>
+    <meta name="color-scheme" content="dark">
+    <title>Контакты - Портфолио Солоткин Артем</title>
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
 
 <body>
-    <a class="skip-link" href="#main">Перейти к основному содержимому</a>
+    <a class="skip-link" href="#main-content">Перейти к основному содержимому</a>
 
-    <header class="header">
+    <header class="header" role="banner">
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <span class="logo-icon">🌿</span>
+                    <span class="logo-icon" aria-hidden="true">🌿</span>
                     <span class="logo-text">Солоткин Артем</span>
                 </div>
-                <nav class="nav" aria-label="Основная навигация">
+                <nav class="nav" aria-label="Основная навигация" role="navigation">
                     <ul class="nav-list">
                         <li><a href="../index.html" class="nav-link">Главная</a></li>
                         <li><a href="projects.html" class="nav-link">Проекты</a></li>
                         <li><a href="diary.html" class="nav-link">Дневник</a></li>
-                        <li><a href="contacts.html" class="nav-link active">Контакты</a></li>
+                        <li><a href="contacts.html" class="nav-link active" aria-current="page">Контакты</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
 
-    <main id="main" class="main">
-        <section class="contacts">
+    <main id="main-content" class="main" role="main">
+        <section class="contacts" aria-labelledby="contacts-title">
             <div class="container">
-                <h1 class="section-title">Свяжитесь со мной</h1>
+                <h1 id="contacts-title" class="section-title">Свяжитесь со мной</h1>
 
                 <div class="contacts-content">
-                    <div class="contact-form">
-                        <form class="form">
-                            <div class="form-group">
-                                <label for="name">Имя:</label>
-                                <input type="text" id="name" name="name" required aria-describedby="name-hint">
-                                <small id="name-hint" class="visually-hidden">Введите ваше полное имя</small>
+                    <div class="contact-form" role="form" aria-labelledby="form-title">
+                        <h2 id="form-title" class="visually-hidden">Форма обратной связи</h2>
+                        <form class="form" id="contact-form" novalidate>
+                            <fieldset>
+                                <legend class="visually-hidden">Персональная информация</legend>
+
+                                <div class="form-group">
+                                    <label for="name" class="required-field">
+                                        Имя:
+                                        <span class="required-star" aria-hidden="true">*</span>
+                                        <span class="visually-hidden">обязательное поле</span>
+                                    </label>
+                                    <input type="text" id="name" name="name" required aria-required="true"
+                                        aria-describedby="name-hint name-error" autocomplete="name"
+                                        placeholder="Введите ваше имя">
+                                    <small id="name-hint" class="form-hint">
+                                        Введите ваше полное имя
+                                    </small>
+                                    <span id="name-error" class="error-message" role="alert" aria-live="polite"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email" class="required-field">
+                                        Email:
+                                        <span class="required-star" aria-hidden="true">*</span>
+                                        <span class="visually-hidden">обязательное поле</span>
+                                    </label>
+                                    <input type="email" id="email" name="email" required aria-required="true"
+                                        aria-describedby="email-hint email-error" autocomplete="email"
+                                        placeholder="example@mail.ru">
+                                    <small id="email-hint" class="form-hint">
+                                        Мы отправим ответ на этот адрес. Пример: example@mail.ru
+                                    </small>
+                                    <span id="email-error" class="error-message" role="alert" aria-live="polite"></span>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend class="visually-hidden">Текст сообщения</legend>
+
+                                <div class="form-group">
+                                    <label for="message" class="required-field">
+                                        Сообщение:
+                                        <span class="required-star" aria-hidden="true">*</span>
+                                        <span class="visually-hidden">обязательное поле</span>
+                                    </label>
+                                    <textarea id="message" name="message" rows="5" required aria-required="true"
+                                        aria-describedby="message-hint message-error"
+                                        placeholder="Опишите ваше предложение или вопрос..."></textarea>
+                                    <small id="message-hint" class="form-hint">
+                                        Опишите ваше предложение или вопрос. Минимум 10 символов.
+                                    </small>
+                                    <span id="message-error" class="error-message" role="alert"
+                                        aria-live="polite"></span>
+                                </div>
+                            </fieldset>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary" aria-describedby="submit-hint">
+                                    Отправить сообщение
+                                </button>
+                                <small id="submit-hint" class="form-hint">
+                                    Все поля, отмеченные звёздочкой (*), обязательны для заполнения
+                                </small>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email:</label>
-                                <input type="email" id="email" name="email" required
-                                    aria-describedby="email-hint email-error">
-                                <small id="email-hint" class="visually-hidden">Мы отправим ответ на этот адрес</small>
-                                <span id="email-error" class="visually-hidden" role="alert"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Сообщение:</label>
-                                <textarea id="message" name="message" rows="5" required
-                                    aria-describedby="message-hint"></textarea>
-                                <small id="message-hint" class="visually-hidden">Опишите ваше предложение или
-                                    вопрос</small>
-                            </div>
-                            <button type="submit" class="btn">Отправить сообщение</button>
                         </form>
                     </div>
 
-                    <div class="contact-info">
-                        <h2>Контакты</h2>
-                        <div class="contact-item">
-                            <img src="../images/icons/email.svg" alt="Иконка email" class="contact-icon">
-                            <span>student@edu.ru</span>
+                    <div class="contact-info" aria-labelledby="contact-info-title">
+                        <h2 id="contact-info-title">Контакты</h2>
+                        <div class="contact-list" role="list">
+                            <div class="contact-item" role="listitem">
+                                <img src="../images/icons/email.svg" alt="" class="contact-icon" aria-hidden="true">
+                                <span>
+                                    <span class="visually-hidden">Электронная почта: </span>
+                                    student@edu.ru
+                                </span>
+                            </div>
+                            <div class="contact-item" role="listitem">
+                                <img src="../images/icons/github.svg" alt="" class="contact-icon" aria-hidden="true">
+                                <span>
+                                    <span class="visually-hidden">GitHub: </span>
+                                    El1teHarp521
+                                </span>
+                            </div>
+                            <div class="contact-item" role="listitem">
+                                <img src="../images/icons/location.svg" alt="" class="contact-icon" aria-hidden="true">
+                                <span>
+                                    <span class="visually-hidden">Местоположение: </span>
+                                    Москва, Россия
+                                </span>
+                            </div>
                         </div>
-                        <div class="contact-item">
-                            <img src="../images/icons/github.svg" alt="Иконка GitHub" class="contact-icon">
-                            <span>GitHub: El1teHarp521</span>
-                        </div>
-                        <div class="contact-item">
-                            <img src="../images/icons/location.svg" alt="Иконка местоположения" class="contact-icon">
-                            <span>Москва, Россия</span>
+
+                        <div class="accessibility-info" aria-labelledby="accessibility-title">
+                            <h3 id="accessibility-title" class="visually-hidden">Информация о доступности</h3>
+                            <p class="accessibility-note">
+                                Эта страница оптимизирована для работы с клавиатуры и скринридерами.
+                                Используйте Tab для навигации и Escape для очистки ошибок.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -82,11 +145,16 @@
         </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
-            <p>&copy; 2024 Контакты</p>
+            <p>&copy; 2024 Солоткин Артем. Все права защищены.</p>
         </div>
     </footer>
+
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/form-validation.js"></script>
+    <script src="../scripts/modal.js"></script>
+    <script src="../scripts/filters.js"></script>
 </body>
 
 </html>
